@@ -24,7 +24,7 @@
         },
         {
             "name": "nginx",
-            "image": "monkeyd/multi-ngninx",
+            "image": "monkeyd/multi-nginx",
             "hostname": "nginx",
             "essential": true,
             "portMappings": [
