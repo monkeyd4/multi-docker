@@ -9,6 +9,7 @@ script:
   - docker run -e CI=true monkeyd/react-tests npm run test
 
 after_success:
+  # Build images
   - docker build -t monkeyd/multi-frontend ./frontend
   - docker build -t monkeyd/multi-nginx ./nginx
   - docker build -t monkeyd/multi-server ./server
@@ -20,3 +21,17 @@ after_success:
   - docker push monkeyd/multi-nginx
   - docker push monkeyd/multi-server
   - docker push monkeyd/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "multi-docker"
+  env: "MultiDocker-env"
+  bucket_name: "elasticbeanstalk-us-east-1-766770920205"
+  bucket_path: "multi-docker"
+  on:
+    branch: master
+  access_key_id: 
+    secure: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"

@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrnVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "frontend",
+            "image": "monkeyd/multi-frontend",
+            "hostname": "frontend",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "monkeyd/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "monkeyd/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "monkeyd/multi-ngninx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+        }
+    ]
+}
