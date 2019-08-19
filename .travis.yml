@@ -18,5 +18,5 @@ after_success:
   # Push the images to docker hub
   - docker push monkeyd/multi-frontend
   - docker push monkeyd/multi-nginx
-  - docker push monkeyd/multi-frontend
+  - docker push monkeyd/multi-server
   - docker push monkeyd/multi-worker
